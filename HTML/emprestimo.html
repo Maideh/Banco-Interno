@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Empréstimo - Seu Banco Digital</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/emprestimo.css">
+    <script src="../JS/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <a href="inicio.html">Voltar</a>
+    </header>
+
+    <main>
+        <h1>Simulador de Empréstimo</h1>
+        <form id="form-emprestimo">
+            <label for="valor">Valor Desejado:</label>
+            <input type="number" id="valor" required>
+            <label for="prazo">Prazo (meses):</label>
+            <input type="number" id="prazo" required>
+            <button type="submit">Simular</button>
+        </form>
+
+        <div id="resultado-simulacao" style="display: none;">
+            <h2>Resultado da Simulação</h2>
+            <p>Valor da Parcela: R$ <span id="valor-parcela"></span></p>
+            <p>Valor Total a Pagar: R$ <span id="valor-total"></span></p>
+            <p>Taxa de Juros: <span id="taxa-juros"></span></p>
+        </div>
+
+        <button onclick="mostrarFormularioEmprestimo()">Empréstimo</button>
+    </main>
+
+    <footer>
+        </footer>
+
+    <script>
+        // JavaScript para calcular o valor das parcelas e exibir o resultado
+    </script>
+</body>
+</html>

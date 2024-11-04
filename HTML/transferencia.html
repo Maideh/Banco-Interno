@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realizar Transferência - Seu Banco Digital</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/transferencia.css">
+    <script src="../JS/script.js" defer></script>
+</head>
+<body>
+    <header>
+        <a href="inicio.html">Voltar</a> 
+    </header>
+    <main>
+        <h1>Realizar Transferência</h1>
+        <form id="form-transferencia">
+            <label for="conta-origem">Conta de Origem:</label>
+            <select id="conta-origem">
+                </select>
+
+            <label for="conta-destino">Conta Destino:</label>
+            <input type="text" id="conta-destino" required>
+
+            <label for="valor">Valor:</label>
+            <input type="number" id="valor" required>
+
+            <button type="submit">Transferir</button>
+
+            <button onclick="mostrarFormularioTransferencia()">Transferência</button>
+        </form>
+    </main>
+
+    <footer>
+        </footer>
+
+    <script>
+        // JavaScript para carregar as opções de contas, validar o formulário e enviar os dados para o backend
+        // ...
+    </script>
+</body>
+</html>

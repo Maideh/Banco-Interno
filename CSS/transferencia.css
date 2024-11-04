@@ -1,0 +1,14 @@
+/* Estilos específicos para a página de transferência */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Outros estilos para personalizar a aparência da página */
+
+/* Estilos para o header */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}

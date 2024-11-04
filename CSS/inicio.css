@@ -1,0 +1,15 @@
+/* Estilos específicos para a página inicial */
+.buttons {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os botões quebrem para a próxima linha se necessário */
+    justify-content: center; /* Centraliza os botões horizontalmente */
+    gap: 10px; /* Espaçamento entre os botões */
+    margin-top: 20px;
+}
+
+/* Outros estilos podem ser adicionados aqui */
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+}

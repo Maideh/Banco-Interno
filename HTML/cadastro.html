@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Seu Banco Digital</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+    <header>
+        <a href="sobre.html">Voltar</a>
+    </header>
+    <div class="container">
+        <h1>Cadastro</h1>
+        <form action="cadastro.php" method="post">
+            <label for="nome">Nome Completo:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm_password">Confirmar Senha:</label>
+            <input type="password" id="confirm_password" name="confirm_password" required>
+
+            <label><input type="checkbox" required> Li e concordo com os <a href="termos.html">termos de uso</a></label>
+
+            <button type="submit">Cadastrar</button>
+            <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+        </form>
+    </div>
+    <script src="../JS/script.js"></script>
+</body>
+</html>
