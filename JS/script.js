@@ -273,7 +273,7 @@ chatInput.addEventListener('keyup', (event) => {
 
 // ##########################################################################
 // ##########################################################################
-// ####- SOBRE sobre.html -####
+// ####- INDEX SOBRE index.html -####
 const btnLogin = document.getElementById('btn-login');
 
 btnLogin.addEventListener('click', () => {
