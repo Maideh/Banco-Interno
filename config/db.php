@@ -3,7 +3,7 @@
 function getDBConnection() {
     try {
         $host = 'localhost';      // Host do banco de dados
-        $dbname = 'postgres'; // Nome do banco de dados
+        $dbname = 'banco_interno'; // Nome do banco de dados
         $user = 'postgres';    // Seu usuário do banco
         $password = 'postgres';  // Sua senha do banco
 
