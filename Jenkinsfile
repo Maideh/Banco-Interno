@@ -49,7 +49,7 @@ pipeline {
                 script {
                     // Deploy para Kubernetes usando os arquivos YAML
                     sh 'kubectl apply -f k8s/deploy.yaml'
-                    sh 'kubectl apply -f k8s/service.yaml'
+                    sh 'kubectl apply -f k8s/deploy-svc.yaml'
                     sh 'kubectl apply -f k8s/stateful.yaml'
                 }
             }
