@@ -1,42 +1,23 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Realizar Transferência - Seu Banco Digital</title>
     <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/transferencia.css">
     <script src="../JS/script.js" defer></script>
+    <title>Transferência</title>
 </head>
 <body>
-    <header>
-        <a href="inicio.html">Voltar</a> 
-    </header>
-    <main>
-        <h1>Realizar Transferência</h1>
-        <form id="form-transferencia">
-            <label for="conta-origem">Conta de Origem:</label>
-            <select id="conta-origem">
-                </select>
+    <h1>Transferências</h1>
+    <p>Saldo Conta Corrente: <span id="saldo_corrente">R$ 0,00</span></p>
+    <p>Saldo Poupança: <span id="saldo_poupanca">R$ 0,00</span></p>
 
-            <label for="conta-destino">Conta Destino:</label>
-            <input type="text" id="conta-destino" required>
+    <h2>Transferir Valores</h2>
+    <label for="valor_transferencia">Digite o valor:</label>
+    <input type="number" id="valor_transferencia" step="0.01" placeholder="Ex: 500">
 
-            <label for="valor">Valor:</label>
-            <input type="number" id="valor" required>
+    <button id="para_poupanca">Transferir para Poupança</button>
+    <button id="para_corrente">Transferir para Conta Corrente</button>
 
-            <button type="submit">Transferir</button>
-
-            <button onclick="mostrarFormularioTransferencia()">Transferência</button>
-        </form>
-    </main>
-
-    <footer>
-        </footer>
-
-    <script>
-        // JavaScript para carregar as opções de contas, validar o formulário e enviar os dados para o backend
-        // ...
-    </script>
 </body>
 </html>

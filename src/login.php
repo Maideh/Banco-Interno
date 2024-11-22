@@ -29,10 +29,11 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         if (password_verify($password, $user['password'])) {
             // A senha está correta, inicia a sessão
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['email'] = $user['email'];  // Armazena o email na sessão
+            $_SESSION['email'] = $user['email'];  // Armazena o e-mail na sessão
+            $_SESSION['nome_usuario'] = $user['name'];  // Armazena o nome do usuário na sessão
 
             // Redireciona para a página inicial
-            header("Location: ../front/HTML/inicio.html");
+            header("Location: ../front/HTML/inicio.html"); // Redireciona para a página inicial (PHP)
             exit;
         } else {
             echo "Senha incorreta!";

@@ -1,0 +1,17 @@
+# Usar uma imagem base
+FROM node:16
+
+# Definir diretório de trabalho
+WORKDIR /app
+
+# Copiar arquivos de código para o contêiner
+COPY . .
+
+# Instalar dependências
+RUN npm install
+
+# Expor a porta do servidor
+EXPOSE 3000
+
+# Comando para rodar a aplicação
+CMD ["npm", "start"]

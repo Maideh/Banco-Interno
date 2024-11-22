@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="../CSS/inicio.css">
     <script src="../JS/script.js" defer></script>
 </head>
-<body>
+<body data-username="">
     <div class="container">
-        <h1>Olá, [Nome do Usuário]!</h1>
-        <p>Seu saldo atual é: R$ <span id="saldo"></span></p>
+        <h1>Olá, <span id="nomeUsuario">Usuário</span>!</h1>
+        <p>Bem-vindo ao Seu Banco Digital.</p>
+        <p>Seu saldo atual é: R$ <span id="saldo">0,00</span></p>
 
         <div class="buttons">
             <button onclick="window.location.href='transferencia.html'">Transferir</button>

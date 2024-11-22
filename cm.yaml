@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: meu-configmap
+data:
+  SERVER_ADDR: "127.0.0.1"
+immutable: true

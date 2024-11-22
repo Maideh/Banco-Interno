@@ -13,6 +13,16 @@ pipeline {
             }
         }
 
+        stage('SAST e SCA') {
+            steps {
+                script {
+                    // SonarQube e Snyk
+                    sh 'sonar-scanner'
+                    sh 'snyk test'
+                }
+            }
+        }
+
         stage('Build Docker') {
             steps {
                 script {
