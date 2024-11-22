@@ -102,3 +102,67 @@ button {
     border-radius: 4px;
     cursor: pointer;
 }
+
+/* Hide the balance initially */
+#saldo_corrente, #saldo_poupanca {
+    visibility: hidden; /* Initially hide the balance */
+    transition: visibility 0.3s ease-in-out;
+}
+
+/* Show the balance when hovering over the parent element */
+p:hover #saldo_corrente, p:hover #saldo_poupanca {
+    visibility: visible;
+}
+
+
+/* Estilos padrões para o modo diurno */
+body {
+    background-color: white;
+    color: black;
+}
+
+.container {
+    background-color: #f9f9f9;
+}
+
+/* Modo noturno */
+body.dark-mode {
+    background-color: #333;
+    color: white;
+}
+
+body.dark-mode .container {
+    background-color: #444;
+}
+
+body.dark-mode button {
+    background-color: #666;
+    color: white;
+}
+
+body.dark-mode h1, body.dark-mode p {
+    color: white;
+}
+
+/* Estilos adicionais para os botões no modo noturno */
+button {
+    background-color: #007BFF;
+    color: white;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo dos botões de "Noite" e "Dia" */
+button.mode-toggle {
+    background-color: #555;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+button.mode-toggle:hover {
+    background-color: #333;
+}

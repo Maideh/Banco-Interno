@@ -20,3 +20,12 @@ SELECT * FROM users WHERE email = :email;
 
 -- Atualizando o token e a data de expiração
 UPDATE users SET reset_token = :token, reset_token_expiry = :expiry WHERE email = :email;
+
+CREATE TABLE transferencias (
+    id SERIAL PRIMARY KEY,
+    valor NUMERIC(10, 2) NOT NULL,
+    tipo_transferencia VARCHAR(20) NOT NULL,  -- 'para_poupanca' ou 'para_corrente'
+    data_transferencia TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    usuario_id INT NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES public.users(id)  -- Referência à tabela 'users'
+);

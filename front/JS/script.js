@@ -102,3 +102,18 @@ function atualizarSaldos() {
         saldoPoupancaElement.textContent = `R$ ${saldoPoupanca.toFixed(2)}`;
     }
 }
+
+// Função para alternar entre o modo noturno e diurno
+function toggleMode() {
+    document.body.classList.toggle("dark-mode");
+    const buttons = document.querySelectorAll('.mode-toggle');
+
+    // Troca o texto dos botões entre "Noite" e "Dia"
+    buttons.forEach(button => {
+        if (document.body.classList.contains('dark-mode')) {
+            button.textContent = "Dia";
+        } else {
+            button.textContent = "Noite";
+        }
+    });
+}
