@@ -1,0 +1,36 @@
+PS DISCO:\AppData\Local\Programs\nginx-1.26.2\nginx-1.26.2> 
+start .\nginx.exe
+PS DISCO:\AppData\Local\Programs\nginx-1.26.2\nginx-1.26.2> 
+.\nginx.exe -s reload
+
+Startar o nginx
+
+
+
+
+
+QUALQUER DIRETORIO:
+php -S 127.0.0.1:9000 -t DISCO:/documentos/github/Banco-interno
+[Fri Nov 22 03:56:33 2024] PHP 8.4.1 Development Server (http://127.0.0.1:9000) started
+
+Startar o php
+
+
+
+
+
+Server [localhost]:
+Database [postgres]: banco_interno
+Port [5432]:
+Username [postgres]:
+Senha para o usuário postgres:
+
+psql (17.1)
+ADVERTÊNCIA: A página de código da console (850) difere da página de código do Windows (1252)
+             os caracteres de 8 bits podem não funcionar corretamente. Veja a página de
+             referência do psql "Notes for Windows users" para obter detalhes.
+Digite "help" para obter ajuda.
+
+banco_interno=#
+
+Abrir o SQL Shell (psql)
