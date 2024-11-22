@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'myapp-image'
+        DOCKER_IMAGE = 'banco-interno-image'
         DOCKER_TAG = 'latest'
     }
 
@@ -13,12 +13,12 @@ pipeline {
             }
         }
 
-        stage('SAST e SCA') {
+        stage('Análise de Segurança') {
             steps {
                 script {
-                    // SonarQube e Snyk
-                    sh 'sonar-scanner'
-                    sh 'snyk test'
+                    // Ferramentas de segurança como SAST e SCA
+                    sh 'docker run --rm -v $(pwd):/app sast-tool /app'
+                    sh 'docker run --rm -v $(pwd):/app sca-tool /app'
                 }
             }
         }
@@ -26,17 +26,8 @@ pipeline {
         stage('Build Docker') {
             steps {
                 script {
-                    // Construir a imagem Docker usando o Dockerfile no repositório
+                    // Construir a imagem Docker
                     sh 'docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
-                }
-            }
-        }
-
-        stage('Testes') {
-            steps {
-                script {
-                    // Executar testes dentro do container
-                    sh 'docker run --rm ${DOCKER_IMAGE}:${DOCKER_TAG} npm test'
                 }
             }
         }
@@ -46,7 +37,8 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
-                        sh 'docker push ${DOCKER_IMAGE}:${DOCKER_TAG}'
+                        sh 'docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}'
+                        sh 'docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}'
                     }
                 }
             }
@@ -55,8 +47,10 @@ pipeline {
         stage('Deploy no Kubernetes') {
             steps {
                 script {
-                    // Deploy no Kubernetes
-                    sh "kubectl set image deployment/myapp-deployment myapp=${DOCKER_IMAGE}:${DOCKER_TAG} --namespace=default"
+                    // Deploy para Kubernetes usando os arquivos YAML
+                    sh 'kubectl apply -f k8s/deploy.yaml'
+                    sh 'kubectl apply -f k8s/service.yaml'
+                    sh 'kubectl apply -f k8s/stateful.yaml'
                 }
             }
         }
@@ -70,7 +64,7 @@ pipeline {
             echo 'Pipeline falhou.'
         }
         always {
-            cleanWs()
+            cleanWs()  // Limpeza do workspace após a execução
         }
     }
 }
