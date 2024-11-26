@@ -4,9 +4,8 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'banco-interno-image'
         DOCKER_TAG = 'latest'
-        DOCKER_REGISTRY = 'docker.io'
         SONAR_TOKEN = credentials('sonarqube-token')
-        GITHUB_TOKEN = credentials('github-token')  
+        GITHUB_TOKEN = credentials('github-token')
     }
 
     stages {
@@ -14,7 +13,7 @@ pipeline {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: 'main']], 
                     userRemoteConfigs: [[url: 'https://github.com/Maideh/Banco-Interno', 
-                    credentialsId: 'github-token']]] )
+                    credentialsId: 'github-token']]])
             }
         }
 
@@ -41,8 +40,8 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
-                        sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}"
-                        sh 'docker push ${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}'
+                        sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_USERNAME}/${DOCKER_IMAGE}:${DOCKER_TAG}"
+                        sh 'docker push ${DOCKER_USERNAME}/${DOCKER_IMAGE}:${DOCKER_TAG}'
                     }
                 }
             }
