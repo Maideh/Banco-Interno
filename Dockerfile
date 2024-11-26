@@ -41,22 +41,25 @@ RUN apt-get update && apt-get install -y \
     php8.1-fpm \
     php8.1-pdo-pgsql \
     php8.1-mbstring \
-    php8.1-openssl \
     php8.1-cli \
     && apt-get clean
 
+# Garantir que a extensão openssl está habilitada no php.ini
+RUN echo "extension=openssl" >> /etc/php/8.1/cli/php.ini \
+    && echo "extension=openssl" >> /etc/php/8.1/fpm/php.ini
+
 # Define o diretório de trabalho
-WORKDIR /var/www/html
+WORKDIR /var/www/banco_interno
 
 # Copia arquivos do build para o diretório web
-COPY --from=build /app /var/www/html
+COPY --from=build /app /var/www/banco_interno
 
 # Copia a configuração do Nginx
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
 
 # Define permissões apropriadas
-RUN chown -R www-data:www-data /var/www/html
+RUN chown -R www-data:www-data /var/www/banco_interno
 
 # Expõe a porta 80
 EXPOSE 80
