@@ -30,6 +30,7 @@ FROM nginx:stable
 # Instala PHP-FPM e dependências
 # Instalar o repositório do PHP e adicionar as dependências necessárias
 RUN apt-get update && apt-get install -y \
+    gnupg \
     lsb-release \
     wget \
     ca-certificates \
