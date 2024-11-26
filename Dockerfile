@@ -28,7 +28,15 @@ COPY . /app
 FROM nginx:stable
 
 # Instala PHP-FPM e dependências
+# Instalar o repositório do PHP e adicionar as dependências necessárias
 RUN apt-get update && apt-get install -y \
+    lsb-release \
+    wget \
+    ca-certificates \
+    && echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/sury-php.list \
+    && wget -qO - https://packages.sury.org/php/apt.gpg | apt-key add - \
+    && apt-get update \
+    && apt-get install -y \
     php8.1-fpm \
     php8.1-pdo-pgsql \
     php8.1-mbstring \
