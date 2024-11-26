@@ -23,7 +23,7 @@ pipeline {
                     snykInstallation: 'snyk_access', 
                     snykTokenId: 'snyk-api-token-id',  
                     additionalArguments: '--all-projects --detection-depth=2'  
-            )
+                )
             }
         }
 
