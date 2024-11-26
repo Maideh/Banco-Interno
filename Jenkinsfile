@@ -19,17 +19,11 @@ pipeline {
 
         stage('Análise de Segurança com SonarQube') {
             steps {
-                script {
-                    withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
-                        sh '''
-                            docker run --rm \
-                                -e SONAR_HOST_URL="http://host.docker.internal:9001" \
-                                -e SONAR_LOGIN=$SONAR_TOKEN \
-                                -v $(pwd):/usr/src \
-                                sonarsource/sonar-scanner-cli
-                        '''
-                    }
-                }
+                snykSecurity(
+                    snykInstallation: 'snyk_access', 
+                    snykTokenId: 'snyk-api-token-id',  
+                    additionalArguments: '--all-projects --detection-depth=2'  
+            )
             }
         }
 
