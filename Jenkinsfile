@@ -9,15 +9,16 @@ pipeline {
     stages {
         stage('Checkout do Código') {
             steps {
-                checkout scm  // Puxa o código do repositório
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/Maideh/Banco-Interno', credentialsId: 'github-token']]])
             }
         }
 
         stage('Análise de Segurança') {
             steps {
                 script {
-                    // Ferramentas de segurança como SAST e SCA
-                    sh 'docker run --rm -v $(pwd):/app sast-tool /app'
+                    // Ferramentas de segurança como SAST:SonarQube(local) e SCA:SNYK(interface web)
+                    sh 'docker run --rm -v
+                     $(pwd):/app sast-tool /app'
                     sh 'docker run --rm -v $(pwd):/app sca-tool /app'
                 }
             }
