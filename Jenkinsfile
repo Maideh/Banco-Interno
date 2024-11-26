@@ -50,9 +50,9 @@ pipeline {
         stage('Deploy no Kubernetes') {
             steps {
                 script {
-                    sh 'kubectl apply -f k8s/deploy.yaml'
-                    sh 'kubectl apply -f k8s/deploy-svc.yaml'
-                    sh 'kubectl apply -f k8s/stateful.yaml'
+                    sh 'kubectl apply -f deploy.yaml'
+                    sh 'kubectl apply -f deploy-svc.yaml'
+                    sh 'kubectl apply -f stateful.yaml'
                 }
             }
         }
