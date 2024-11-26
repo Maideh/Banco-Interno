@@ -6,6 +6,7 @@ pipeline {
         DOCKER_TAG = 'latest'
         SONAR_TOKEN = credentials('sonarqube-token')
         GITHUB_TOKEN = credentials('github-token')
+        KUBE_TOKEN = credentials('kubernetes-token')
     }
 
     stages {
@@ -22,7 +23,7 @@ pipeline {
                 snykSecurity(
                     snykInstallation: 'snyk_access', 
                     snykTokenId: 'snyk-api-token-id',  
-                    additionalArguments: '--all-projects --detection-depth=2'  
+                    additionalArguments: '--all-projects --detection-depth=2'
                 )
             }
         }
@@ -50,9 +51,16 @@ pipeline {
         stage('Deploy no Kubernetes') {
             steps {
                 script {
-                    sh 'kubectl apply -f deploy.yaml'
-                    sh 'kubectl apply -f deploy-svc.yaml'
-                    sh 'kubectl apply -f stateful.yaml'
+                    withCredentials([string(credentialsId: 'kubernetes-token', variable: 'KUBE_TOKEN')]) {
+                        sh """
+                        kubectl config set-credentials jenkins --token=${KUBE_TOKEN}
+                        kubectl config set-context jenkins --cluster=kubernetes --user=jenkins
+                        kubectl config use-context jenkins
+                        """
+                        sh 'kubectl apply -f deploy.yaml'
+                        sh 'kubectl apply -f deploy-svc.yaml'
+                        sh 'kubectl apply -f stateful.yaml'
+                    }
                 }
             }
         }
