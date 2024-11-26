@@ -1,0 +1,11 @@
+{
+    "name": "banco-interno",
+    "version": "1.0.0",
+    "description": "Projeto Banco Interno",
+    "main": "../front/JS/script.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+    }
+}
