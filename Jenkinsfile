@@ -53,7 +53,7 @@ pipeline {
                 script {
                     withCredentials([string(credentialsId: 'kubernetes-token', variable: 'KUBE_TOKEN')]) {
                         sh """
-                        kubectl config set-credentials jenkins --token=${KUBE_TOKEN}
+                        kubectl config set-credentials admin --token=${KUBE_TOKEN}
                         kubectl config set-context microk8s --cluster=microk8s-cluster --user=admin
                         kubectl config use-context microk8s
                         """
