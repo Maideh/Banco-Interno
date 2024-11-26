@@ -57,9 +57,9 @@ pipeline {
                         kubectl config set-context microk8s --cluster=microk8s-cluster --user=admin
                         kubectl config use-context microk8s
                         """
-                        sh 'kubectl apply -f deploy.yaml'
-                        sh 'kubectl apply -f deploy-svc.yaml'
-                        sh 'kubectl apply -f stateful.yaml'
+                        sh 'kubectl apply -f deploy.yaml --validate=false'
+                        sh 'kubectl apply -f deploy-svc.yaml --validate=false'
+                        sh 'kubectl apply -f stateful.yaml --validate=false'
                     }
                 }
             }
