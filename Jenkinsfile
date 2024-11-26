@@ -4,21 +4,31 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'banco-interno-image'
         DOCKER_TAG = 'latest'
+        SONAR_TOKEN = credentials('sonarqube-token')
+        GITHUB_TOKEN = credentials('github-token')  
     }
 
     stages {
         stage('Checkout do Código') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: 'main']], userRemoteConfigs: [[url: 'https://github.com/Maideh/Banco-Interno', credentialsId: 'github-token']]])
+                checkout([$class: 'GitSCM', branches: [[name: 'main']], 
+                    userRemoteConfigs: [[url: 'https://github.com/Maideh/Banco-Interno', 
+                    credentialsId: 'github-token']]])
             }
         }
 
-        stage('Análise de Segurança') {
+        stage('Análise de Segurança com SonarQube') {
             steps {
                 script {
-                    // Ferramentas de segurança como SAST:SonarQube(local) e SCA:SNYK(interface web)
-                    sh 'docker run --rm -v $(pwd):/app sast-tool /app'
-                    sh 'docker run --rm -v $(pwd):/app sca-tool /app'
+                    withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+                        sh '''
+                            docker run --rm \
+                                -e SONAR_HOST_URL="http://host.docker.internal:9001" \
+                                -e SONAR_LOGIN=$SONAR_TOKEN \
+                                -v $(pwd):/usr/src \
+                                sonarsource/sonar-scanner-cli
+                        '''
+                    }
                 }
             }
         }
@@ -26,7 +36,6 @@ pipeline {
         stage('Build Docker') {
             steps {
                 script {
-                    // Construir a imagem Docker
                     sh 'docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
                 }
             }
@@ -47,7 +56,6 @@ pipeline {
         stage('Deploy no Kubernetes') {
             steps {
                 script {
-                    // Deploy para Kubernetes usando os arquivos YAML
                     sh 'kubectl apply -f k8s/deploy.yaml'
                     sh 'kubectl apply -f k8s/deploy-svc.yaml'
                     sh 'kubectl apply -f k8s/stateful.yaml'
@@ -64,7 +72,7 @@ pipeline {
             echo 'Pipeline falhou.'
         }
         always {
-            cleanWs()  // Limpeza do workspace após a execução
+            cleanWs()
         }
     }
 }
