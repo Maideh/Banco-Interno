@@ -17,8 +17,7 @@ pipeline {
             steps {
                 script {
                     // Ferramentas de segurança como SAST:SonarQube(local) e SCA:SNYK(interface web)
-                    sh 'docker run --rm -v
-                     $(pwd):/app sast-tool /app'
+                    sh 'docker run --rm -v $(pwd):/app sast-tool /app'
                     sh 'docker run --rm -v $(pwd):/app sca-tool /app'
                 }
             }
