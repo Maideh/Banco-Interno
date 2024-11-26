@@ -54,7 +54,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'kubernetes-token', variable: 'KUBE_TOKEN')]) {
                         sh """
                         kubectl config set-credentials jenkins --token=${KUBE_TOKEN}
-                        kubectl config set-context jenkins --cluster=kubernetes --user=jenkins
+                        kubectl config set-context jenkins --cluster=microk8s-cluster --user=admin
                         kubectl config use-context jenkins
                         """
                         sh 'kubectl apply -f deploy.yaml'
