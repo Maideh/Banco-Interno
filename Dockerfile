@@ -16,7 +16,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 WORKDIR /app
 
 # Copia os arquivos necessários para instalação das dependências
-COPY testes/composer.json composer.lock /app/
+COPY testes/composer.json /app/
 
 # Instala dependências PHP
 RUN composer install --no-dev --optimize-autoloader
