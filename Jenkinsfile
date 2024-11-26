@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = 'banco-interno-image'
         DOCKER_TAG = 'latest'
+        DOCKER_REGISTRY = 'docker.io'
         SONAR_TOKEN = credentials('sonarqube-token')
         GITHUB_TOKEN = credentials('github-token')  
     }
@@ -13,7 +14,7 @@ pipeline {
             steps {
                 checkout([$class: 'GitSCM', branches: [[name: 'main']], 
                     userRemoteConfigs: [[url: 'https://github.com/Maideh/Banco-Interno', 
-                    credentialsId: 'github-token']]])
+                    credentialsId: 'github-token']]] )
             }
         }
 
