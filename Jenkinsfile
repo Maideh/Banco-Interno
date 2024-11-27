@@ -50,18 +50,9 @@ pipeline {
 
         stage('Deploy no Kubernetes') {
             steps {
-                script {
-                    withCredentials([string(credentialsId: 'kubernetes-token', variable: 'KUBE_TOKEN')]) {
-                        sh """
-                        kubectl config set-credentials admin --token=${KUBE_TOKEN}
-                        kubectl config set-context microk8s --cluster=microk8s-cluster --user=admin
-                        kubectl config use-context microk8s
-                        """
-                        sh 'kubectl apply -f deploy.yaml --validate=false'
-                        sh 'kubectl apply -f deploy-svc.yaml --validate=false'
-                        sh 'kubectl apply -f stateful.yaml --validate=false'
-                    }
-                }
+               sh 'kubectl apply -f deploy.yaml --validate=false'
+                sh 'kubectl apply -f deploy-svc.yaml --validate=false'
+                sh 'kubectl apply -f stateful.yaml --validate=false'
             }
         }
     }
